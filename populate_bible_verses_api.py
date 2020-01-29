@@ -9,7 +9,7 @@ import re
 
 # excel_url = "https://raw.githubusercontent.com/cs109/2014_data/master/countries.csv"
 # excel_url = "https://github.com/stephengeospy/bible-verse-auto-fill/bible_memory_verses.xls"
-excel_url = "bible_memory_verses.xls"
+excel_url = "bible_memory_verses_api.xls"
 sheet_name = "crossway"
 df = pd.read_excel(excel_url, sheet_name).fillna('N/A')
 
