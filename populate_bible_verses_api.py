@@ -7,9 +7,9 @@ import configparser
 # Set Environment Values
 def set_env():
     # excel_url = "https://github.com/stephengeospy/bible-verse-auto-fill/bible_memory_verses.xls"
-    cfg_file = "bible-verse-auto-fill.cfg"
+    cfg_file = "resources/bible-verse-auto-fill.cfg"
     cfg_section_name = "bible-crossway"
-    excel_url = "bible_memory_verses_api.xls"
+    excel_url = "resources/bible_memory_verses_api.xls"
     sheet_name = "crossway"
     return cfg_file, cfg_section_name, excel_url, sheet_name
 
@@ -42,7 +42,7 @@ def get_esv_text(reference, cfg_dict):
     cfg_dict['PARAMS'].update({'q': reference})
     response = requests.get(cfg_dict['API_URL'], params=cfg_dict['PARAMS'], headers=cfg_dict['HEADERS'])
     passages = response.json()['passages']
-    return re.sub('\s\s+', ' ', passages[0].strip() if passages else 'Error: Passage not found')
+    return re.sub(r'\s\s+', ' ', passages[0].strip() if passages else 'Error: Passage not found')
 
 
 if __name__ == '__main__':
@@ -68,7 +68,7 @@ if __name__ == '__main__':
             print(passage_text)
         else:
             if reference == 'N/A':
-                print("No Reference at {0}".format(index, text))
+                print("No Reference at {0}".format(index))
 
     # Write back to the excel sheet with updated info
     df.to_excel(excel_url, sheet_name="crossway", index=False)
